@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,6 +9,8 @@
     <OutputType>Library</OutputType>
     <RootNamespace>TiledSharp</RootNamespace>
     <AssemblyName>TiledSharp</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,11 +37,15 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\IStructuralComparable.cs" />
+    <Compile Include="src\IStructuralEquatable.cs" />
     <Compile Include="src\TiledCore.cs" />
     <Compile Include="src\Map.cs" />
     <Compile Include="src\Layer.cs" />
     <Compile Include="src\Tileset.cs" />
     <Compile Include="src\AssemblyInfo.cs" />
+    <Compile Include="src\Tuple.cs" />
+    <Compile Include="src\Tuples.cs" />
     <Compile Include="src\zlib\CRC32.cs" />
     <Compile Include="src\zlib\Deflate.cs" />
     <Compile Include="src\zlib\DeflateStream.cs" />

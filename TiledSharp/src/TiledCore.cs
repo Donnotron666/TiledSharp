@@ -36,7 +36,11 @@ namespace TiledSharp
             if (fileRes != null)
             {
                 Stream xmlStream = asm.GetManifestResourceStream(fileRes);
-                xDoc = XDocument.Load(xmlStream);
+                // ADDED FOR UNITY DLL
+                StreamReader reader = new StreamReader(xmlStream);
+                string text = reader.ReadToEnd();
+                // ADDED FOR UNITY DLL
+                xDoc = XDocument.Load(text);
                 TmxDirectory = "";
             }
             else
@@ -109,8 +113,8 @@ namespace TiledSharp
 
     public class TmxImage
     {
-        public string Source {get; private set;}
         public string Format {get; private set;}
+        public string Source {get; private set;}
         public Stream Data {get; private set;}
         public TmxColor Trans {get; private set;}
         public int? Width {get; private set;}
