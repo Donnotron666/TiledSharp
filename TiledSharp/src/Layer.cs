@@ -15,8 +15,8 @@ namespace TiledSharp
         public double Opacity {get; private set;}
         public bool Visible {get; private set;}
 
-        public List<TmxLayerTile> Tiles {get; private set;}
-        public PropertyDict Properties {get; private set;}
+        public List<TmxLayerTile> Tiles {get; set;}
+        public PropertyDict Properties {get; set;}
 
         public TmxLayer(XElement xLayer, int width, int height)
         {
@@ -76,12 +76,12 @@ namespace TiledSharp
         const uint FLIPPED_VERTICALLY_FLAG   = 0x40000000;
         const uint FLIPPED_DIAGONALLY_FLAG   = 0x20000000;
 
-        public int Gid {get; private set;}
-        public int X {get; private set;}
-        public int Y {get; private set;}
-        public bool HorizontalFlip {get; private set;}
-        public bool VerticalFlip {get; private set;}
-        public bool DiagonalFlip {get; private set;}
+        public int Gid {get; set;}
+        public int X {get; set;}
+        public int Y {get; set;}
+        public bool HorizontalFlip {get; set;}
+        public bool VerticalFlip {get; set;}
+        public bool DiagonalFlip {get; set;}
 
         public TmxLayerTile(uint id, int x, int y)
         {
