@@ -75,7 +75,42 @@ namespace TiledSharp
                 nameCount.Add(key, 0);
             base.Add(t);
         }
+        
+        public new bool Remove(T t)
+        {
+            var key = Tuple.Create<TmxList<T>, string>(this, t.Name);
+            if(this.Contains(t.Name))
+            {
+                if (nameCount[key] > 0)
+                {
+                    nameCount[key]--;
+                    return true;
+                }
+                else
+                {
+                    nameCount.Remove(key);
 
+                    return base.Remove(t);
+                }
+            }
+
+            return true;
+
+        }
+
+        public new void ClearItems()
+        {
+            
+            foreach( var key in nameCount.Keys.ToList() )
+            {
+                if(key.Item1 == this)
+                {
+                    nameCount.Remove(key);
+                }    
+            }
+            base.ClearItems();
+        }
+        
         protected override string GetKeyForItem(T t)
         {
             var key = Tuple.Create<TmxList<T>, string> (this, t.Name);

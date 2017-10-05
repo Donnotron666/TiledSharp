@@ -16,8 +16,8 @@ namespace TiledSharp
         public double Opacity {get; private set;}
         public bool Visible {get; private set;}
 
-        public TmxList<TmxObject> Objects {get; private set;}
-        public PropertyDict Properties {get; private set;}
+        public TmxList<TmxObject> Objects {get; set;}
+        public PropertyDict Properties {get; set;}
 
         public TmxObjectGroup(XElement xObjectGroup)
         {
