@@ -83,9 +83,11 @@ namespace TiledSharp
         public bool VerticalFlip {get; set;}
         public bool DiagonalFlip {get; set;}
 
+        private uint rawGid;
+
         public TmxLayerTile(uint id, int x, int y)
         {
-            var rawGid = id;
+            rawGid = id;
             X = x;
             Y = y;
 
@@ -108,6 +110,11 @@ namespace TiledSharp
 
             // Save GID remainder to int
             Gid = (int)rawGid;
+        }
+
+        public TmxLayerTile Clone()
+        {
+            return new TmxLayerTile(rawGid, X, Y);
         }
     }
 }
