@@ -17,7 +17,7 @@ namespace TiledSharp
     {
         public string TmxDirectory {get; private set;}
 
-        protected XDocument ReadXml(string filepath)
+        public XDocument ReadXml(string filepath)
         {
             XDocument xDoc;
 
@@ -42,6 +42,10 @@ namespace TiledSharp
                 // ADDED FOR UNITY DLL
                 xDoc = XDocument.Load(text);
                 TmxDirectory = "";
+                xmlStream.Close();
+                xmlStream.Dispose();
+                reader.Close();
+                reader.Dispose();
             }
             else
             {
@@ -62,8 +66,7 @@ namespace TiledSharp
 
     public class TmxList<T> : KeyedCollection<string, T> where T : ITmxElement
     {
-        public static Dictionary<Tuple<TmxList<T>, string>, int> nameCount
-            = new Dictionary<Tuple<TmxList<T>, string>, int>();
+        public Dictionary<Tuple<TmxList<T>, string>, int> nameCount = new Dictionary<Tuple<TmxList<T>, string>, int>();
 
         public new void Add(T t)
         {
@@ -93,14 +96,12 @@ namespace TiledSharp
                     return base.Remove(t);
                 }
             }
-
             return true;
 
         }
 
         public new void ClearItems()
         {
-            
             foreach( var key in nameCount.Keys.ToList() )
             {
                 if(key.Item1 == this)

@@ -114,7 +114,7 @@ namespace TiledSharp
 
         public TmxLayerTile Clone()
         {
-            return new TmxLayerTile(rawGid, X, Y);
+            return new TmxLayerTile((uint)Gid, X, Y);
         }
     }
 }

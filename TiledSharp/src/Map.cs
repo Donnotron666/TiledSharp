@@ -108,7 +108,8 @@ namespace TiledSharp
             foreach (var e in xMap.Elements("imagelayer"))
                 ImageLayers.Add(new TmxImageLayer(e, TmxDirectory));
         }
-
+        
+            
         public enum OrientationType
         {
             Unknown,
