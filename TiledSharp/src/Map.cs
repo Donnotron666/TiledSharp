@@ -23,6 +23,8 @@ namespace TiledSharp
         public TmxColor BackgroundColor {get; private set;}
         public int? NextObjectID {get; private set;}
 
+        public static Dictionary<string, TmxTileset> CachedTilesets = new Dictionary<string, TmxTileset>();
+
         public TmxList<TmxTileset> Tilesets {get; private set;}
         public TmxList<TmxLayer> Layers {get; private set;}
         public TmxList<TmxObjectGroup> ObjectGroups {get; private set;}
@@ -94,7 +96,10 @@ namespace TiledSharp
 
             Tilesets = new TmxList<TmxTileset>();
             foreach (var e in xMap.Elements("tileset"))
-                Tilesets.Add(new TmxTileset(e, TmxDirectory));
+            {
+                Tilesets.Add(GetTileSet(e, TmxDirectory));
+                break; //breaking here because BF'88 only lets rooms use 1 tileset at a time.
+            }
 
             Layers = new TmxList<TmxLayer>();
             foreach (var e in xMap.Elements("layer"))
@@ -109,7 +114,19 @@ namespace TiledSharp
                 ImageLayers.Add(new TmxImageLayer(e, TmxDirectory));
         }
         
-            
+
+        public TmxTileset GetTileSet(XElement e, String directory)
+        {
+            TmxTileset ret = null;
+            var resource = e.LastAttribute.Value;
+            if (!CachedTilesets.TryGetValue(resource, out ret))
+            {
+                ret = new TmxTileset(e, directory);
+                CachedTilesets[resource] = ret;
+            }
+            return ret;
+        }
+    
         public enum OrientationType
         {
             Unknown,
